@@ -105,10 +105,10 @@
     // Imágenes de las preguntas
     const images = [
         "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg",
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg",
         "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg",
         "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg"
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"
     ];
 
     // Función para manejar el clic en "Sí" de la primera pregunta
@@ -116,14 +116,14 @@
         // Ocultar las preguntas previas y los botones
         buttonsContainer.style.display = 'none'; // Ocultar los botones de respuesta
 
-        // Mostrar la quinta pregunta
-        fifthQuestion.style.display = 'block';
-
         // Cambiar la imagen a la quinta
         mainImage.src = images[4];
 
         // Cambiar la pregunta
         questionText.innerHTML = '¡Te quiero mucho! 💕';
+
+        // Mostrar la quinta pregunta
+        fifthQuestion.style.display = 'block';
     });
 
     // Función para manejar el clic en "No"
@@ -144,6 +144,7 @@
         fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta
         messageDiv.innerHTML = "¡Gracias por perdonarme! 💖"; // Mensaje final
         mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(76).jpeg"; // Imagen final
+        buttonsContainer.style.display = 'none'; // Ocultar los botones después de "Sí"
     });
 
     // Función para manejar el clic en "No" de la quinta pregunta
@@ -152,6 +153,7 @@
         messageDiv.innerHTML = "¡Oh no! 😢";
         fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta
         mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(77).jpeg"; // Imagen final después de "No"
+        buttonsContainer.style.display = 'none'; // Ocultar los botones después de "No"
     });
 
     // Actualizar la imagen según el contador de preguntas
