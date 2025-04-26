@@ -87,6 +87,20 @@
         <button class="button" id="secondNoButton">No</button>
     </div>
 
+    <!-- Tercera pregunta -->
+    <div id="thirdQuestion" style="display: none;">
+        <h1>¡Di que sí! ❤️</h1>
+        <button class="button" id="thirdYesButton">Sí</button>
+        <button class="button" id="thirdNoButton">No</button>
+    </div>
+
+    <!-- Cuarta pregunta -->
+    <div id="fourthQuestion" style="display: none;">
+        <h1>¡No seas malit@! 😔</h1>
+        <button class="button" id="fourthYesButton">Sí</button>
+        <button class="button" id="fourthNoButton">No</button>
+    </div>
+
     <!-- Quinta pregunta -->
     <div id="fifthQuestion" style="display: none;">
         <h1>¡Te quiero mucho! 💕</h1>
@@ -106,6 +120,8 @@
     const mainImage = document.getElementById('mainImage');
     const questionText = document.getElementById('questionText');
     const secondQuestion = document.getElementById('secondQuestion'); // Segunda pregunta
+    const thirdQuestion = document.getElementById('thirdQuestion'); // Tercera pregunta
+    const fourthQuestion = document.getElementById('fourthQuestion'); // Cuarta pregunta
     const fifthQuestion = document.getElementById('fifthQuestion'); // Quinta pregunta
     const buttonsContainer = document.getElementById('buttonsContainer');
 
@@ -146,18 +162,56 @@
 
     // Función para manejar el clic en "Sí" de la segunda pregunta
     document.getElementById('secondYesButton').addEventListener('click', () => {
-        // Cambiar a la quinta pregunta
-        fifthQuestion.style.display = 'block';
+        // Mostrar la tercera pregunta
         secondQuestion.style.display = 'none'; // Ocultar segunda pregunta
-        mainImage.src = images[4]; // Cambiar la imagen a la quinta
-        questionText.innerHTML = '¡Te quiero mucho! 💕';
+        thirdQuestion.style.display = 'block'; // Mostrar tercera pregunta
+        mainImage.src = images[2]; // Cambiar la imagen a la tercera
+        questionText.innerHTML = '¡Di que sí! ❤️';
     });
 
     // Función para manejar el clic en "No" de la segunda pregunta
     document.getElementById('secondNoButton').addEventListener('click', () => {
-        messageDiv.innerHTML = "¡Oh no! 😢";
+        // Mostrar la tercera pregunta
         secondQuestion.style.display = 'none'; // Ocultar segunda pregunta
-        mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(76).jpeg"; // Imagen de arrepentimiento
+        thirdQuestion.style.display = 'block'; // Mostrar tercera pregunta
+        mainImage.src = images[2]; // Cambiar la imagen a la tercera
+        questionText.innerHTML = '¡Di que sí! ❤️';
+    });
+
+    // Función para manejar el clic en "Sí" de la tercera pregunta
+    document.getElementById('thirdYesButton').addEventListener('click', () => {
+        // Mostrar la cuarta pregunta
+        thirdQuestion.style.display = 'none'; // Ocultar tercera pregunta
+        fourthQuestion.style.display = 'block'; // Mostrar cuarta pregunta
+        mainImage.src = images[3]; // Cambiar la imagen a la cuarta
+        questionText.innerHTML = '¡No seas malit@! 😔';
+    });
+
+    // Función para manejar el clic en "No" de la tercera pregunta
+    document.getElementById('thirdNoButton').addEventListener('click', () => {
+        // Mostrar la cuarta pregunta
+        thirdQuestion.style.display = 'none'; // Ocultar tercera pregunta
+        fourthQuestion.style.display = 'block'; // Mostrar cuarta pregunta
+        mainImage.src = images[3]; // Cambiar la imagen a la cuarta
+        questionText.innerHTML = '¡No seas malit@! 😔';
+    });
+
+    // Función para manejar el clic en "Sí" de la cuarta pregunta
+    document.getElementById('fourthYesButton').addEventListener('click', () => {
+        // Mostrar la quinta pregunta
+        fourthQuestion.style.display = 'none'; // Ocultar cuarta pregunta
+        fifthQuestion.style.display = 'block'; // Mostrar quinta pregunta
+        mainImage.src = images[4]; // Cambiar la imagen a la quinta
+        questionText.innerHTML = '¡Te quiero mucho! 💕';
+    });
+
+    // Función para manejar el clic en "No" de la cuarta pregunta
+    document.getElementById('fourthNoButton').addEventListener('click', () => {
+        // Mostrar la quinta pregunta
+        fourthQuestion.style.display = 'none'; // Ocultar cuarta pregunta
+        fifthQuestion.style.display = 'block'; // Mostrar quinta pregunta
+        mainImage.src = images[4]; // Cambiar la imagen a la quinta
+        questionText.innerHTML = '¡Te quiero mucho! 💕';
     });
 
     // Función para manejar el clic en "Sí" de la quinta pregunta
@@ -167,6 +221,7 @@
         mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(77).jpeg"; // Imagen final
         buttonsContainer.style.display = 'none'; // Ocultar los botones después de "Sí"
     });
+
 </script>
 
 </body>
