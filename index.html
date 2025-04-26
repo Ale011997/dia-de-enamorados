@@ -61,37 +61,48 @@
             border-radius: 15px;
         }
 
+        /* Animación para el texto */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .text-animation {
+            animation: fadeIn 2s ease-in-out;
+            color: red;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container" id="mainContainer">
+<div class="container">
     <h1 id="questionText">Me perdonas? 🥺</h1>
     
-    <div id="buttonsContainer">
+    <div>
         <button class="button" id="yesButton">Sí</button>
         <button class="button" id="noButton">No</button>
     </div>
 
     <div id="message"></div>
 
-    <!-- Imagen principal que cambiará -->
+    <!-- Imagen principal que siempre estará visible -->
     <div id="imageContainer" class="image-container">
         <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
-    </div>
-
-    <!-- Quinta pregunta que aparecerá solo cuando presione "Sí" en la primera pregunta -->
-    <div id="fifthQuestion" style="display: none;">
-        <h1>¡Te quiero mucho! 💕</h1>
-        <button class="button" id="fifthYesButton">Sí</button>
-        <button class="button" id="fifthNoButton">No</button>
     </div>
 
 </div>
 
 <script>
-    // Contador de preguntas
-    let questionCounter = 0;
+    // Variables de control
+    let questionCounter = 0; // Para controlar el número de preguntas
+    let imageCounter = 0; // Para controlar las imágenes
 
     // Referencias a los elementos
     const yesButton = document.getElementById('yesButton');
@@ -99,58 +110,49 @@
     const messageDiv = document.getElementById('message');
     const mainImage = document.getElementById('mainImage');
     const questionText = document.getElementById('questionText');
-    const fifthQuestion = document.getElementById('fifthQuestion'); // Quinta pregunta
-    const buttonsContainer = document.getElementById('buttonsContainer');
 
-    // Imágenes de las preguntas
-    const images = [
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg",
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg"
-    ];
-
-    // Función para manejar el clic en "Sí" de la primera pregunta
+    // Función para manejar el clic en "Sí"
     yesButton.addEventListener('click', () => {
-        // Ocultar las preguntas previas y los botones
-        buttonsContainer.style.display = 'none'; // Ocultar los botones de respuesta
-
-        // Cambiar la imagen a la quinta
-        mainImage.src = images[4];
-
-        // Cambiar la pregunta
-        questionText.innerHTML = '¡Te quiero mucho! 💕';
-
-        // Mostrar la quinta pregunta
-        fifthQuestion.style.display = 'block';
+        messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
+        questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
     });
 
-    // Función para manejar el clic en "No"
+    // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
-        questionCounter++;
-        if (questionCounter < 5) {
-            updateImage(questionCounter);
-            updateQuestion(questionCounter);
-        } else {
-            messageDiv.innerHTML = 'Fin de las preguntas.';
-            buttonsContainer.style.display = 'none';
-        }
- 
+        questionCounter++; // Incrementar el número de preguntas
+        imageCounter++; // Cambiar la imagen
 
-    // Actualizar la imagen según el contador de preguntas
-    function updateImage(counter) {
-        mainImage.src = images[counter]; // Cambiar la imagen
-    }
+        updateQuestion(questionCounter); // Cambiar la pregunta
+        updateImage(imageCounter); // Cambiar la imagen
+    });
 
-    // Actualizar la pregunta según el contador de preguntas
+    // Función para actualizar la pregunta según el contador
     function updateQuestion(counter) {
-        if (counter === 1) {
+        if (counter === 0) {
+            questionText.innerHTML = 'Me perdonas? 🥺';
+        } else if (counter === 1) {
             questionText.innerHTML = 'Por fa, perdóname 😢';
         } else if (counter === 2) {
             questionText.innerHTML = '¡Di que sí! ❤️';
         } else if (counter === 3) {
             questionText.innerHTML = '¡No seas malit@! 😔';
+        } else {
+            questionText.innerHTML = 'Te amo! ❤️'; // Cuando el contador llega a 5
+        }
+    }
+
+    // Actualizar la imagen según el contador
+    function updateImage(counter) {
+        const images = [
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg", // Imagen para la segunda pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg"  // Imagen para la quinta pregunta
+        ];
+
+        if (counter < images.length) {
+            mainImage.src = images[counter]; // Cambiar la fuente de la imagen
         }
     }
 </script>
