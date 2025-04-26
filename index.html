@@ -101,7 +101,7 @@
 
     <div id="message"></div>
 
-    <!-- Imagen principal que cambia después de cada respuesta -->
+    <!-- Imagen principal que siempre estará visible -->
     <div id="imageContainer" class="image-container">
         <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
     </div>
@@ -140,7 +140,7 @@
 
     // Lógica para cuando el usuario presiona "Sí"
     yesButton.addEventListener('click', () => {
-        messageDiv.innerHTML = ''; // Limpiar el mensaje
+        messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
         questionSection.style.display = 'none'; // Ocultar las preguntas
     });
 
@@ -192,4 +192,5 @@
 
 </body>
 </html>
+
 
