@@ -82,7 +82,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="mainContainer">
     <h1 id="questionText">Me perdonas? 🥺</h1>
     
     <div>
@@ -126,9 +126,14 @@
     const fifthQuestion = document.getElementById('fifthQuestion'); // Quinta pregunta
     const fifthYesButton = document.getElementById('fifthYesButton');
     const fifthNoButton = document.getElementById('fifthNoButton');
+    const mainContainer = document.getElementById('mainContainer');
 
     // Función para manejar el clic en "Sí" de la primera pregunta
     yesButton.addEventListener('click', () => {
+        // Ocultar las preguntas previas
+        mainContainer.innerHTML = ''; // Limpiar el contenido anterior
+        
+        // Mostrar mensaje de agradecimiento
         messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
         questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
         
@@ -138,7 +143,7 @@
         // Mostrar la quinta pregunta solo cuando presiona "Sí" en la primera pregunta
         fifthQuestion.style.display = 'block';
 
-        // Deshabilitar los botones "Sí" y "No" de la primera pregunta
+        // Deshabilitar los botones "Sí" y "No" para que no interactúen más
         yesButton.disabled = true;
         noButton.disabled = true;
     });
