@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: red;
+            color: white;
         }
 
         .container {
@@ -97,6 +97,18 @@
         <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
     </div>
 
+    <!-- Imagen que aparecerá cuando se presione "Sí" -->
+    <div id="thankYouImage" class="image-container" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg" alt="Gracias">
+    </div>
+
+    <!-- Quinta pregunta que aparecerá solo cuando presione "Sí" en la primera pregunta -->
+    <div id="fifthQuestion" style="display: none;">
+        <h1>¡Te quiero mucho! 💕</h1>
+        <button class="button" id="fifthYesButton">Sí</button>
+        <button class="button" id="fifthNoButton">No</button>
+    </div>
+
 </div>
 
 <script>
@@ -110,23 +122,61 @@
     const messageDiv = document.getElementById('message');
     const mainImage = document.getElementById('mainImage');
     const questionText = document.getElementById('questionText');
+    const thankYouImage = document.getElementById('thankYouImage'); // Imagen de agradecimiento
+    const fifthQuestion = document.getElementById('fifthQuestion'); // Quinta pregunta
+    const fifthYesButton = document.getElementById('fifthYesButton');
+    const fifthNoButton = document.getElementById('fifthNoButton');
 
-    // Función para manejar el clic en "Sí"
+    // Función para manejar el clic en "Sí" de la primera pregunta
     yesButton.addEventListener('click', () => {
         messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
         questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
+        
+        // Mostrar la imagen de agradecimiento
+        thankYouImage.style.display = 'block';
+        
+        // Mostrar la quinta pregunta solo cuando presiona "Sí" en la primera pregunta
+        fifthQuestion.style.display = 'block';
+
+        // Deshabilitar los botones "Sí" y "No" de la primera pregunta
+        yesButton.disabled = true;
+        noButton.disabled = true;
     });
 
     // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
+        updateImage(imageCounter); // Cambiar imagen
+        updateQuestion(questionCounter); // Cambiar pregunta
+    });
+
+    // Función para manejar el clic en "Sí" de la quinta pregunta
+    fifthYesButton.addEventListener('click', () => {
+        alert('¡Te quiero mucho también! 💖');
+        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta después de "Sí"
+    });
+
+    // Función para manejar el clic en "No" de la quinta pregunta
+    fifthNoButton.addEventListener('click', () => {
+        alert('¡Oh no! 😢');
+        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta después de "No"
+    });
+
+    // Función para manejar el clic en "Sí" de las preguntas
+    function handleYes() {
+        alert('¡Gracias por perdonarme!');
+        questionSection.style.display = 'none'; // Ocultar las preguntas después de la última
+    }
+
+    // Función para manejar el clic en "No" de las preguntas
+    function handleNo() {
         questionCounter++; // Incrementar el número de preguntas
         imageCounter++; // Cambiar la imagen
 
-        updateQuestion(questionCounter); // Cambiar la pregunta
+        updateQuestion(questionCounter); // Mostrar la siguiente pregunta
         updateImage(imageCounter); // Cambiar la imagen
-    });
+    }
 
-    // Función para actualizar la pregunta según el contador
+    // Actualizar la pregunta según el contador
     function updateQuestion(counter) {
         if (counter === 0) {
             questionText.innerHTML = 'Me perdonas? 🥺';
@@ -145,10 +195,10 @@
     function updateImage(counter) {
         const images = [
             "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg", // Imagen para la segunda pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
             "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
             "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg"  // Imagen para la quinta pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"  // Imagen para la quinta pregunta
         ];
 
         if (counter < images.length) {
