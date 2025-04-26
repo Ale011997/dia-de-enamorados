@@ -101,12 +101,14 @@
 
     <div id="message"></div>
 
+    <!-- Primera imagen, siempre visible -->
     <div class="image-container">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg">
+        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1">
     </div>
-<!-- Imagen que se mostrará si el usuario presiona "Sí" -->
-    <div id="imageContainer" class="image-container">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg" alt="Imagen interactiva">
+
+    <!-- Segunda imagen, que se muestra cuando se hace clic en "Sí" -->
+    <div id="secondImageContainer" class="image-container" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg" alt="Imagen 2">
     </div>
     
 
@@ -118,9 +120,11 @@
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
     const messageDiv = document.getElementById('message');
+    const secondImageContainer = document.getElementById('secondImageContainer');
 
     // Función para manejar el clic en "Sí"
     yesButton.addEventListener('click', () => {
+        secondImageContainer.style.display = 'block'; // Mostrar la segunda imagen
         messageDiv.innerHTML = ''; // Limpiar el mensaje
     });
 
