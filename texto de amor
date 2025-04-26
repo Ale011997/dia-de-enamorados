@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interacción con Botones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffb6c1; /* Rosa de fondo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            width: 80%;
+            max-width: 350px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #e91e63; /* Color rosa fuerte */
+        }
+
+        .container p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .button {
+            background-color: #f06292;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 30px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #d81b60;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            border: 10px solid white;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 15px;
+        }
+
+        .text-animation {
+            color: red;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        /* Animación para el texto */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .text-animation {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>No seas así 💔</h1>
+    <p>Haz clic en uno de los botones para ver lo que sucede.</p>
+    
+    <div>
+        <button class="button" id="yesButton">Sí</button>
+        <button class="button" id="noButton">No</button>
+    </div>
+
+    <div id="message"></div>
+
+    <div class="image-container">
+        <img src="https://www.example.com/your-image.jpg" alt="Imagen interactiva">
+    </div>
+
+    <p class="text-animation">¡En algún momento te será útil!</p>
+</div>
+
+<script>
+    // Variables para controlar las respuestas
+    let noCounter = 0;
+
+    // Obtener los elementos del botón y del mensaje
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const messageDiv = document.getElementById('message');
+
+    // Función para manejar el clic en "Sí"
+    yesButton.addEventListener('click', () => {
+        messageDiv.innerHTML = ''; // Limpiar el mensaje
+    });
+
+    // Función para manejar el clic en "No"
+    noButton.addEventListener('click', () => {
+        noCounter++; // Incrementar el contador de "No"
+
+        if (noCounter === 1) {
+            messageDiv.innerHTML = '¿Estás segura?'; // Primer mensaje
+        } else if (noCounter === 2) {
+            messageDiv.innerHTML = 'Por fa, perdóname 😢'; // Segundo mensaje
+        } else {
+            messageDiv.innerHTML = ''; // Limpiar después del tercer "No"
+        }
+    });
+</script>
+
+</body>
+</html>
