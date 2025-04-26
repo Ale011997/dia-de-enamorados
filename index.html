@@ -97,13 +97,6 @@
         <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
     </div>
 
-    <!-- Sección de preguntas adicionales -->
-    <div id="questionSection" style="display: none;">
-        <p id="questionText1" class="text-animation">¿Estás seguro de que me perdonas?</p>
-        <button class="button" id="yes1">Sí</button>
-        <button class="button" id="no1">No</button>
-    </div>
-
 </div>
 
 <script>
@@ -117,38 +110,23 @@
     const messageDiv = document.getElementById('message');
     const mainImage = document.getElementById('mainImage');
     const questionText = document.getElementById('questionText');
-    const questionSection = document.getElementById('questionSection');
-    const questionText1 = document.getElementById('questionText1');
 
     // Función para manejar el clic en "Sí"
     yesButton.addEventListener('click', () => {
         messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
-        questionSection.style.display = 'none'; // Ocultar las preguntas
+        questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
     });
 
     // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
-        updateImage(imageCounter); // Cambiar imagen
-        updateQuestion(questionCounter); // Cambiar pregunta
-        questionSection.style.display = 'block'; // Mostrar las preguntas
-    });
-
-    // Función para manejar el clic en "Sí" de las preguntas
-    function handleYes() {
-        alert('¡Gracias por perdonarme!');
-        questionSection.style.display = 'none'; // Ocultar las preguntas después de la última
-    }
-
-    // Función para manejar el clic en "No" de las preguntas
-    function handleNo() {
         questionCounter++; // Incrementar el número de preguntas
         imageCounter++; // Cambiar la imagen
 
-        updateQuestion(questionCounter); // Mostrar la siguiente pregunta
+        updateQuestion(questionCounter); // Cambiar la pregunta
         updateImage(imageCounter); // Cambiar la imagen
-    }
+    });
 
-    // Actualizar la pregunta según el contador
+    // Función para actualizar la pregunta según el contador
     function updateQuestion(counter) {
         if (counter === 0) {
             questionText.innerHTML = 'Me perdonas? 🥺';
@@ -159,7 +137,7 @@
         } else if (counter === 3) {
             questionText.innerHTML = '¡No seas malit@! 😔';
         } else {
-            questionText.innerHTML = 'Te amo! ❤️';
+            questionText.innerHTML = 'Te amo! ❤️'; // Cuando el contador llega a 5
         }
     }
 
@@ -177,10 +155,6 @@
             mainImage.src = images[counter]; // Cambiar la fuente de la imagen
         }
     }
-
-    // Asignar eventos a las respuestas "Sí" y "No" de las preguntas
-    document.getElementById('yes1').addEventListener('click', handleYes);
-    document.getElementById('no1').addEventListener('click', handleNo);
 </script>
 
 </body>
