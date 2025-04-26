@@ -61,23 +61,6 @@
             border-radius: 15px;
         }
 
-        /* Animación para el texto */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .text-animation {
-            animation: fadeIn 2s ease-in-out;
-            color: red;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
     </style>
 </head>
 <body>
@@ -92,14 +75,9 @@
 
     <div id="message"></div>
 
-    <!-- Imagen principal que siempre estará visible -->
+    <!-- Imagen principal que cambiará -->
     <div id="imageContainer" class="image-container">
         <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
-    </div>
-
-    <!-- Imagen que aparecerá cuando se presione "Sí" -->
-    <div id="thankYouImage" class="image-container" style="display: none;">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg" alt="Gracias">
     </div>
 
     <!-- Quinta pregunta que aparecerá solo cuando presione "Sí" en la primera pregunta -->
@@ -112,9 +90,8 @@
 </div>
 
 <script>
-    // Variables de control
-    let questionCounter = 0; // Para controlar el número de preguntas
-    let imageCounter = 0; // Para controlar las imágenes
+    // Contador de preguntas
+    let questionCounter = 0;
 
     // Referencias a los elementos
     const yesButton = document.getElementById('yesButton');
@@ -122,94 +99,58 @@
     const messageDiv = document.getElementById('message');
     const mainImage = document.getElementById('mainImage');
     const questionText = document.getElementById('questionText');
-    const thankYouImage = document.getElementById('thankYouImage'); // Imagen de agradecimiento
     const fifthQuestion = document.getElementById('fifthQuestion'); // Quinta pregunta
-    const fifthYesButton = document.getElementById('fifthYesButton');
-    const fifthNoButton = document.getElementById('fifthNoButton');
-    const mainContainer = document.getElementById('mainContainer');
     const buttonsContainer = document.getElementById('buttonsContainer');
+
+    // Imágenes de las preguntas
+    const images = [
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg",
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg",
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg",
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg",
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"
+    ];
 
     // Función para manejar el clic en "Sí" de la primera pregunta
     yesButton.addEventListener('click', () => {
         // Ocultar las preguntas previas y los botones
-        mainContainer.innerHTML = ''; // Limpiar el contenido anterior
-        
-        // Mostrar mensaje de agradecimiento
-        messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
-        questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
-        
-        // Mostrar la imagen de agradecimiento
-        thankYouImage.style.display = 'block';
-        
-        // Mostrar la quinta pregunta solo cuando presiona "Sí" en la primera pregunta
+        buttonsContainer.style.display = 'none'; // Ocultar los botones de respuesta
+
+        // Mostrar la quinta pregunta
         fifthQuestion.style.display = 'block';
 
-        // Deshabilitar los botones "Sí" y "No" para que no interactúen más
-        yesButton.disabled = true;
-        noButton.disabled = true;
+        // Cambiar la imagen a la quinta
+        mainImage.src = images[4];
+
+        // Cambiar la pregunta
+        questionText.innerHTML = '¡Te quiero mucho! 💕';
     });
 
-    // Lógica para cuando el usuario presiona "No"
+    // Función para manejar el clic en "No"
     noButton.addEventListener('click', () => {
-        // Aquí puedes agregar lo que quieres hacer cuando el usuario presione "No"
-        updateImage(imageCounter); // Cambiar imagen
-        updateQuestion(questionCounter); // Cambiar pregunta
+        questionCounter++;
+        if (questionCounter < 5) {
+            updateImage(questionCounter);
+            updateQuestion(questionCounter);
+        } else {
+            messageDiv.innerHTML = 'Fin de las preguntas.';
+            buttonsContainer.style.display = 'none';
+        }
     });
 
-    // Función para manejar el clic en "Sí" de la quinta pregunta
-    fifthYesButton.addEventListener('click', () => {
-        alert('¡Te quiero mucho también! 💖');
-        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta después de "Sí"
-    });
-
-    // Función para manejar el clic en "No" de la quinta pregunta
-    fifthNoButton.addEventListener('click', () => {
-        alert('¡Oh no! 😢');
-        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta después de "No"
-    });
-
-    // Función para manejar el clic en "Sí" de las preguntas
-    function handleYes() {
-        alert('¡Gracias por perdonarme!');
-        questionSection.style.display = 'none'; // Ocultar las preguntas después de la última
+    // Actualizar la imagen según el contador de preguntas
+    function updateImage(counter) {
+        mainImage.src = images[counter]; // Cambiar la imagen
     }
 
-    // Función para manejar el clic en "No" de las preguntas
-    function handleNo() {
-        questionCounter++; // Incrementar el número de preguntas
-        imageCounter++; // Cambiar la imagen
-
-        updateQuestion(questionCounter); // Mostrar la siguiente pregunta
-        updateImage(imageCounter); // Cambiar la imagen
-    }
-
-    // Actualizar la pregunta según el contador
+    // Actualizar la pregunta según el contador de preguntas
     function updateQuestion(counter) {
-        if (counter === 0) {
-            questionText.innerHTML = 'Me perdonas? 🥺';
-        } else if (counter === 1) {
+        if (counter === 1) {
             questionText.innerHTML = 'Por fa, perdóname 😢';
         } else if (counter === 2) {
             questionText.innerHTML = '¡Di que sí! ❤️';
         } else if (counter === 3) {
             questionText.innerHTML = '¡No seas malit@! 😔';
-        } else {
-            questionText.innerHTML = 'Te amo! ❤️'; // Cuando el contador llega a 5
-        }
-    }
-
-    // Actualizar la imagen según el contador
-    function updateImage(counter) {
-        const images = [
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
-            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"  // Imagen para la quinta pregunta
-        ];
-
-        if (counter < images.length) {
-            mainImage.src = images[counter]; // Cambiar la fuente de la imagen
         }
     }
 </script>
