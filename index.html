@@ -67,12 +67,6 @@
             border-radius: 15px;
         }
 
-        .text-animation {
-            color: red;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
         /* Animación para el texto */
         @keyframes fadeIn {
             0% {
@@ -85,6 +79,9 @@
 
         .text-animation {
             animation: fadeIn 2s ease-in-out;
+            color: red;
+            font-weight: bold;
+            font-size: 1.5em;
         }
 
     </style>
@@ -107,9 +104,9 @@
     </div>
 
     <!-- Sección de preguntas adicionales -->
-    <div id="questionSection" style="display: none;">
+    <div id="questionSection">
         <div id="question1" class="question">
-            <p>¿Estás seguro de que me perdonas?</p>
+            <p class="text-animation">¿Estás seguro de que me perdonas?</p>
             <button class="button" id="yes1">Sí</button>
             <button class="button" id="no1">No</button>
         </div>
@@ -129,7 +126,7 @@
     const mainImage = document.getElementById('mainImage');
     const questionSection = document.getElementById('questionSection');
     
-    // Array de URLs de las imágenes
+    // Array de URLs de las imágenes para cada pregunta
     const images = [
         "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
         "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
@@ -146,8 +143,9 @@
 
     // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
-        questionSection.style.display = 'block'; // Mostrar las preguntas
         updateImage(imageCounter); // Cambiar imagen al principio
+        questionSection.style.display = 'block'; // Mostrar las preguntas
+        updateQuestion(questionCounter); // Cambiar pregunta
     });
 
     // Función para manejar el clic en "Sí" de las preguntas
@@ -162,7 +160,7 @@
         imageCounter++; // Cambiar la imagen
 
         if (questionCounter < 5) {
-            nextQuestion(questionCounter); // Mostrar la siguiente pregunta
+            updateQuestion(questionCounter); // Mostrar la siguiente pregunta
             updateImage(imageCounter); // Cambiar la imagen
         } else {
             alert('¡Por favor, perdóname más! 😢'); // Mensaje después de 5 preguntas
@@ -170,27 +168,25 @@
         }
     }
 
-    // Mostrar la siguiente pregunta
-    function nextQuestion(counter) {
+    // Función para actualizar la pregunta
+    function updateQuestion(counter) {
         const questionDiv = document.getElementById('question' + (counter + 1));
         if (questionDiv) {
-            questionDiv.style.display = 'block';
+            questionDiv.style.display = 'block'; // Mostrar la pregunta correspondiente
         }
     }
 
-    // Actualizar la imagen según el contador de imágenes
+    // Función para actualizar la imagen
     function updateImage(counter) {
         if (counter < images.length) {
             mainImage.src = images[counter]; // Cambiar la fuente de la imagen
         }
     }
 
-    // Asignar eventos a las respuestas "Sí" y "No"
+    // Asignar eventos a las respuestas "Sí" y "No" de las preguntas
     document.getElementById('yes1').addEventListener('click', handleYes);
     document.getElementById('no1').addEventListener('click', handleNo);
 </script>
 
 </body>
 </html>
-
-
