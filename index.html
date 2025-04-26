@@ -101,46 +101,95 @@
 
     <div id="message"></div>
 
-    <!-- Primera imagen, siempre visible -->
-    <div class="image-container">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1">
+    <!-- Imagen principal que cambia después de cada respuesta -->
+    <div id="imageContainer" class="image-container">
+        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
     </div>
 
-    <!-- Segunda imagen, que se muestra cuando se hace clic en "Sí" -->
-    <div id="secondImageContainer" class="image-container" style="display: none;">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg" alt="Imagen 2">
+    <!-- Sección de preguntas adicionales -->
+    <div id="questionSection" style="display: none;">
+        <div id="question1" class="question">
+            <p>¿Estás seguro de que me perdonas?</p>
+            <button class="button" id="yes1">Sí</button>
+            <button class="button" id="no1">No</button>
+        </div>
     </div>
-    
+
+</div>
 
 <script>
-    // Variables para controlar las respuestas
-    let noCounter = 0;
+    // Variables de control
+    let questionCounter = 0; // Para controlar el número de preguntas
+    let imageCounter = 0; // Para controlar las imágenes
 
-    // Obtener los elementos del botón y del mensaje
+    // Referencias a los elementos
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
     const messageDiv = document.getElementById('message');
-    const secondImageContainer = document.getElementById('secondImageContainer');
+    const mainImage = document.getElementById('mainImage');
+    const questionSection = document.getElementById('questionSection');
+    
+    // Array de URLs de las imágenes
+    const images = [
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
+        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"  // Imagen para la quinta pregunta
+    ];
 
-    // Función para manejar el clic en "Sí"
+    // Lógica para cuando el usuario presiona "Sí"
     yesButton.addEventListener('click', () => {
-        secondImageContainer.style.display = 'block'; // Mostrar la segunda imagen
         messageDiv.innerHTML = ''; // Limpiar el mensaje
+        questionSection.style.display = 'none'; // Ocultar las preguntas
     });
 
-    // Función para manejar el clic en "No"
+    // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
-        noCounter++; // Incrementar el contador de "No"
-
-        if (noCounter === 1) {
-            messageDiv.innerHTML = '¿Estás segura?'; // Primer mensaje
-        } else if (noCounter === 2) {
-            messageDiv.innerHTML = 'Por fa, perdóname 😢'; // Segundo mensaje
-        } else {
-            messageDiv.innerHTML = ''; // Limpiar después del tercer "No"
-        }
+        questionSection.style.display = 'block'; // Mostrar las preguntas
+        updateImage(imageCounter); // Cambiar imagen al principio
     });
+
+    // Función para manejar el clic en "Sí" de las preguntas
+    function handleYes() {
+        alert('¡Gracias por perdonarme!');
+        questionSection.style.display = 'none'; // Ocultar las preguntas después de la última
+    }
+
+    // Función para manejar el clic en "No" de las preguntas
+    function handleNo() {
+        questionCounter++; // Incrementar el número de preguntas
+        imageCounter++; // Cambiar la imagen
+
+        if (questionCounter < 5) {
+            nextQuestion(questionCounter); // Mostrar la siguiente pregunta
+            updateImage(imageCounter); // Cambiar la imagen
+        } else {
+            alert('¡Por favor, perdóname más! 😢'); // Mensaje después de 5 preguntas
+            questionSection.style.display = 'none'; // Ocultar las preguntas después de 5 "No"
+        }
+    }
+
+    // Mostrar la siguiente pregunta
+    function nextQuestion(counter) {
+        const questionDiv = document.getElementById('question' + (counter + 1));
+        if (questionDiv) {
+            questionDiv.style.display = 'block';
+        }
+    }
+
+    // Actualizar la imagen según el contador de imágenes
+    function updateImage(counter) {
+        if (counter < images.length) {
+            mainImage.src = images[counter]; // Cambiar la fuente de la imagen
+        }
+    }
+
+    // Asignar eventos a las respuestas "Sí" y "No"
+    document.getElementById('yes1').addEventListener('click', handleYes);
+    document.getElementById('no1').addEventListener('click', handleNo);
 </script>
 
 </body>
 </html>
+
