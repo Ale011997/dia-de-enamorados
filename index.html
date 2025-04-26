@@ -138,6 +138,22 @@
         }
     });
 
+    // Función para manejar el clic en "Sí" de la quinta pregunta
+    document.getElementById("fifthYesButton").addEventListener('click', () => {
+        // Ocultar todo (mensajes y botones) cuando presionas "Sí" en la quinta pregunta
+        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta
+        messageDiv.innerHTML = "¡Gracias por perdonarme! 💖"; // Mensaje final
+        mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(76).jpeg"; // Imagen final
+    });
+
+    // Función para manejar el clic en "No" de la quinta pregunta
+    document.getElementById("fifthNoButton").addEventListener('click', () => {
+        // Mostrar mensaje de arrepentimiento
+        messageDiv.innerHTML = "¡Oh no! 😢";
+        fifthQuestion.style.display = 'none'; // Ocultar la quinta pregunta
+        mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(77).jpeg"; // Imagen final después de "No"
+    });
+
     // Actualizar la imagen según el contador de preguntas
     function updateImage(counter) {
         mainImage.src = images[counter]; // Cambiar la imagen
