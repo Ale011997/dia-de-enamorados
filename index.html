@@ -67,6 +67,13 @@
             border-radius: 15px;
         }
 
+        .text-animation {
+            animation: fadeIn 2s ease-in-out;
+            color: red;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
         /* Animación para el texto */
         @keyframes fadeIn {
             0% {
@@ -77,19 +84,12 @@
             }
         }
 
-        .text-animation {
-            animation: fadeIn 2s ease-in-out;
-            color: red;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1> Me perdonas? 🥺</h1>
+    <h1 id="questionText">Me perdonas? 🥺</h1>
     
     <div>
         <button class="button" id="yesButton">Sí</button>
@@ -104,9 +104,9 @@
     </div>
 
     <!-- Sección de preguntas adicionales -->
-    <div id="questionSection">
+    <div id="questionSection" style="display: none;">
         <div id="question1" class="question">
-            <p class="text-animation">¿Estás seguro de que me perdonas?</p>
+            <p id="questionText1" class="text-animation">¿Estás seguro de que me perdonas?</p>
             <button class="button" id="yes1">Sí</button>
             <button class="button" id="no1">No</button>
         </div>
@@ -125,17 +125,9 @@
     const messageDiv = document.getElementById('message');
     const mainImage = document.getElementById('mainImage');
     const questionSection = document.getElementById('questionSection');
-    
-    // Array de URLs de las imágenes para cada pregunta
-    const images = [
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
-        "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"  // Imagen para la quinta pregunta
-    ];
+    const questionText = document.getElementById('questionText');
 
-    // Lógica para cuando el usuario presiona "Sí"
+    // Función para manejar el clic en "Sí"
     yesButton.addEventListener('click', () => {
         messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
         questionSection.style.display = 'none'; // Ocultar las preguntas
@@ -143,9 +135,9 @@
 
     // Lógica para cuando el usuario presiona "No"
     noButton.addEventListener('click', () => {
-        updateImage(imageCounter); // Cambiar imagen al principio
-        questionSection.style.display = 'block'; // Mostrar las preguntas
+        updateImage(imageCounter); // Cambiar imagen
         updateQuestion(questionCounter); // Cambiar pregunta
+        questionSection.style.display = 'block'; // Mostrar las preguntas
     });
 
     // Función para manejar el clic en "Sí" de las preguntas
@@ -159,25 +151,37 @@
         questionCounter++; // Incrementar el número de preguntas
         imageCounter++; // Cambiar la imagen
 
-        if (questionCounter < 5) {
-            updateQuestion(questionCounter); // Mostrar la siguiente pregunta
-            updateImage(imageCounter); // Cambiar la imagen
-        } else {
-            alert('¡Por favor, perdóname más! 😢'); // Mensaje después de 5 preguntas
-            questionSection.style.display = 'none'; // Ocultar las preguntas después de 5 "No"
-        }
+        updateQuestion(questionCounter); // Mostrar la siguiente pregunta
+        updateImage(imageCounter); // Cambiar la imagen
     }
 
-    // Función para actualizar la pregunta
+    // Actualizar la pregunta según el contador
     function updateQuestion(counter) {
-        const questionDiv = document.getElementById('question' + (counter + 1));
-        if (questionDiv) {
-            questionDiv.style.display = 'block'; // Mostrar la pregunta correspondiente
+        if (counter === 0) {
+            questionText.innerHTML = 'Me perdonas? 🥺';
+        } else if (counter === 1) {
+            questionText.innerHTML = '¿Estás seguro de que me perdonas?';
+        } else if (counter === 2) {
+            questionText.innerHTML = 'Por fa, perdóname 😢';
+        } else if (counter === 3) {
+            questionText.innerHTML = '¡Di que sí! ❤️';
+        } else if (counter === 4) {
+            questionText.innerHTML = '¡No seas malit@! 😔';
+        } else {
+            questionText.innerHTML = 'Te amo! ❤️';
         }
     }
 
-    // Función para actualizar la imagen
+    // Actualizar la imagen según el contador
     function updateImage(counter) {
+        const images = [
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg", // Imagen para la segunda pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg"  // Imagen para la quinta pregunta
+        ];
+
         if (counter < images.length) {
             mainImage.src = images[counter]; // Cambiar la fuente de la imagen
         }
