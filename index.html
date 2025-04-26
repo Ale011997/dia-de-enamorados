@@ -85,7 +85,7 @@
 <div class="container" id="mainContainer">
     <h1 id="questionText">Me perdonas? 🥺</h1>
     
-    <div>
+    <div id="buttonsContainer">
         <button class="button" id="yesButton">Sí</button>
         <button class="button" id="noButton">No</button>
     </div>
@@ -127,10 +127,11 @@
     const fifthYesButton = document.getElementById('fifthYesButton');
     const fifthNoButton = document.getElementById('fifthNoButton');
     const mainContainer = document.getElementById('mainContainer');
+    const buttonsContainer = document.getElementById('buttonsContainer');
 
     // Función para manejar el clic en "Sí" de la primera pregunta
     yesButton.addEventListener('click', () => {
-        // Ocultar las preguntas previas
+        // Ocultar las preguntas previas y los botones
         mainContainer.innerHTML = ''; // Limpiar el contenido anterior
         
         // Mostrar mensaje de agradecimiento
