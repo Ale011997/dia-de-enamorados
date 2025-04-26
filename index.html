@@ -77,4 +77,75 @@
 
     <!-- Imagen principal que siempre estará visible -->
     <div id="imageContainer" class="image-container">
-        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/15
+        <img src="https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg" alt="Imagen 1" id="mainImage">
+    </div>
+
+</div>
+
+<script>
+    // Variables de control
+    let questionCounter = 0; // Para controlar el número de preguntas
+    let imageCounter = 0; // Para controlar las imágenes
+
+    // Referencias a los elementos
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const messageDiv = document.getElementById('message');
+    const mainImage = document.getElementById('mainImage');
+    const questionText = document.getElementById('questionText');
+    const buttonsContainer = document.getElementById('buttonsContainer');
+
+    // Función para manejar el clic en "Sí"
+    yesButton.addEventListener('click', () => {
+        messageDiv.innerHTML = '¡Gracias por perdonarme! 💖'; // Mensaje de agradecimiento
+        questionText.innerHTML = 'Te amo! ❤️'; // Mostrar mensaje final
+        
+        // Cambiar la imagen
+        mainImage.src = "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg";
+        
+        // Ocultar botones después de hacer clic en "Sí"
+        buttonsContainer.style.display = 'none';
+    });
+
+    // Lógica para cuando el usuario presiona "No"
+    noButton.addEventListener('click', () => {
+        questionCounter++; // Incrementar el número de preguntas
+        imageCounter++; // Cambiar la imagen
+
+        updateQuestion(questionCounter); // Cambiar la pregunta
+        updateImage(imageCounter); // Cambiar la imagen
+    });
+
+    // Función para actualizar la pregunta según el contador
+    function updateQuestion(counter) {
+        if (counter === 0) {
+            questionText.innerHTML = 'Me perdonas? 🥺';
+        } else if (counter === 1) {
+            questionText.innerHTML = 'Por fa, perdóname 😢';
+        } else if (counter === 2) {
+            questionText.innerHTML = '¡Di que sí! ❤️';
+        } else if (counter === 3) {
+            questionText.innerHTML = '¡No seas malit@! 😔';
+        } else {
+            questionText.innerHTML = 'Te amo! ❤️'; // Cuando el contador llega a 5
+        }
+    }
+
+    // Actualizar la imagen según el contador
+    function updateImage(counter) {
+        const images = [
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/1521315357d97efec008b54aed024b527d195685/descarga%20(71).jpeg", // Imagen para la primera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(75).jpeg", // Imagen para la segunda pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(73).jpeg", // Imagen para la tercera pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(74).jpeg", // Imagen para la cuarta pregunta
+            "https://raw.githubusercontent.com/Ale011997/dia-de-enamorados/refs/heads/main/descarga%20(72).jpeg"  // Imagen para la quinta pregunta
+        ];
+
+        if (counter < images.length) {
+            mainImage.src = images[counter]; // Cambiar la fuente de la imagen
+        }
+    }
+</script>
+
+</body>
+</html>
